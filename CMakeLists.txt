@@ -26,6 +26,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNING_FLAGS}")
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS})
 
+set(ANGLE_STATIC OFF CACHE BOOL "Build ANGLE to be included as a static library")
+if(ANGLE_STATIC)
+    set(LIBRARY_TYPE STATIC)
+    add_definitions(-DANGLE_STATIC)
+else()
+    set(LIBRARY_TYPE SHARED)
+endif()
+
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/src
     src
@@ -819,7 +827,7 @@ target_compile_definitions(ANGLE
 target_link_libraries(ANGLE
     PRIVATE ${ANGLE_LIBRARIES})
 
-add_library(GLESv2
+add_library(GLESv2 ${LIBRARY_TYPE}
     src/common/angleutils.h
     src/common/debug.h
     src/libGLESv2/entry_points_egl.cpp
@@ -850,7 +858,7 @@ if(MSVC)
         /DEF:${CMAKE_CURRENT_SOURCE_DIR}/src/libGLESv2/libGLESv2.def)
 endif()
 
-add_library(EGL
+add_library(EGL ${LIBRARY_TYPE}
     src/libEGL/libEGL.cpp
     src/libEGL/libEGL.def
     src/libEGL/libEGL.rc
