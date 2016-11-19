@@ -236,8 +236,6 @@ egl::Error SurfaceD3D::swapRect(EGLint x, EGLint y, EGLint width, EGLint height)
         }
     }
 
-    checkForOutOfDateSwapChain();
-
     return egl::Error(EGL_SUCCESS);
 }
 
@@ -279,6 +277,8 @@ bool SurfaceD3D::checkForOutOfDateSwapChain()
 
 egl::Error SurfaceD3D::swap()
 {
+    checkForOutOfDateSwapChain();
+
     return swapRect(0, 0, mWidth, mHeight);
 }
 
