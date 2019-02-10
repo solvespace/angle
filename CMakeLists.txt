@@ -319,14 +319,10 @@ endif()
 target_compile_definitions(angle_translator
     PRIVATE ${ANGLE_TRANSLATOR_LIB_DEFINITIONS})
 
-include(GetGitCommitHash)
-if(GIT_COMMIT_HASH STREQUAL "")
-    file(COPY src/commit.h DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/src/id)
-else()
-    configure_file(
-        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/commit.h.in
-        ${CMAKE_CURRENT_BINARY_DIR}/src/id/commit.h)
-endif()
+string(SUBSTRING "$Id$" 5 40 GIT_COMMIT_HASH)
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/commit.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/src/id/commit.h)
 
 set(ANGLE_SOURCES
     src/common/event_tracer.cpp
