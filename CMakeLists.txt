@@ -711,7 +711,7 @@ if(ANGLE_ENABLE_D3D9 OR ANGLE_ENABLE_D3D11)
         src/libANGLE/renderer/d3d/WorkaroundsD3D.h)
 
     list(APPEND ANGLE_DEFINITIONS
-        "-DANGLE_PRELOADED_D3DCOMPILER_MODULE_NAMES={ \"d3dcompiler_47.dll\", \"d3dcompiler_46.dll\", \"d3dcompiler_43.dll\" }")
+        "-DANGLE_PRELOADED_D3DCOMPILER_MODULE_NAMES={\"d3dcompiler_47.dll\",\"d3dcompiler_46.dll\",\"d3dcompiler_43.dll\"}")
 endif()
 
 set(ANGLE_ENABLE_OPENGL ON CACHE BOOL "Enable OpenGL")
